@@ -1,0 +1,22 @@
+services:
+  crafty:
+    container_name: crafty_container
+    image: registry.gitlab.com/crafty-controller/crafty-4:4.10.2
+    restart: always
+    environment:
+      - TZ=${TZ:-UTC}
+    ports:
+      - "19132:19132/udp"          # Bedrock
+      - "25500-25600:25500-25600"  # Minecraft servers port range
+    volumes:
+      - ${MINECRAFT_DATA_PATH:-./docker}/backups:/crafty/backups
+      - ${MINECRAFT_DATA_PATH:-./docker}/logs:/crafty/logs
+      - ${MINECRAFT_DATA_PATH:-./docker}/servers:/crafty/servers
+      - ${MINECRAFT_DATA_PATH:-./docker}/config:/crafty/app/config
+      - ${MINECRAFT_DATA_PATH:-./docker}/import:/crafty/import
+    networks:
+      - caddy_net
+
+networks:
+  caddy_net:
+    external: true
