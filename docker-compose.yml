@@ -6,9 +6,9 @@ services:
     restart: always
     environment:
       - TZ=${TZ:-UTC}
-    #ports:
-    #  - "19132:19132/udp"          # Bedrock
-    #  - "25500-25600:25500-25600"  # Minecraft servers port range
+    ports:
+      - "19132:19132/udp"          # Bedrock
+      - "25500-25600:25500-25600"  # Minecraft servers port range
     volumes:
       - ${BASE_DATA_PATH:-./data}/minecraft/backups:/crafty/backups
       - ${BASE_DATA_PATH:-./data}/minecraft/logs:/crafty/logs
