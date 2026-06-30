@@ -1,0 +1,21 @@
+networks:
+  caddy_net:
+    external: true
+  crafty_internal_net:
+    external: true
+    
+services:
+  caddy-crafty:
+    image: caddy:2
+    restart: unless-stopped
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - caddy_net
+      - crafty_internal_net
+
+volumes:
+  caddy_data:
+  caddy_config:

@@ -11,6 +11,7 @@ ensure_network() {
 }
 
 ensure_network caddy_net
-export COMPOSE_FILE="docker-compose.yml"
+ensure_network crafty_internal_net
+export COMPOSE_FILE="docker-compose.yml:docker-compose.caddy.yml"
 docker compose $@
 unset COMPOSE_FILE

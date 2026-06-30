@@ -1,0 +1,25 @@
+(common) {
+	encode gzip zstd
+}
+
+:8080 {
+	import common
+
+	reverse_proxy https://crafty:8443 {
+		transport http {
+			tls_insecure_skip_verify
+		}
+
+		header_up Host {host}
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+:8123 {
+	import common
+
+	reverse_proxy crafty:8123  {
+		header_up Host {host}
+		header_up X-Real-IP {remote_host}
+	}
+}

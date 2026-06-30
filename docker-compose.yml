@@ -16,8 +16,8 @@ services:
       - ${BASE_DATA_PATH:-./data}/minecraft/config:/crafty/app/config
       - ${BASE_DATA_PATH:-./data}/minecraft/import:/crafty/import
     networks:
-      - caddy_net
+      - crafty_internal_net
 
 networks:
-  caddy_net:
+  crafty_internal_net:
     external: true
